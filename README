@@ -1,0 +1,14 @@
+POE::Filter::LZF
+================
+
+A POE filter wrapped around Compress::LZF
+
+Installation:-
+
+perl Makefile.PL
+make
+make test
+su -
+make install
+
+>;o)

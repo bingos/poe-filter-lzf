@@ -1,0 +1,15 @@
+use inc::Module::Install;
+name 'POE-Filter-LZF';
+author 'Chris Williams <chris@bingosnet.co.uk';
+license 'perl';
+version_from 'lib/POE/Filter/LZF.pm';
+abstract_from 'lib/POE/Filter/LZF.pm';
+build_requires 'Test::More' => 0.47;
+build_requires 'POE::Filter::Stackable' => 0;
+build_requires 'POE::Filter::Line' => 0;
+requires 'warnings::compat' => 0 if $] < 5.006;
+requires 'Carp' => 0;
+requires 'Compress::LZF' => 1.51;
+requires 'POE'    => 0.38;
+requires 'POE::Filter' => 0;
+WriteAll();
