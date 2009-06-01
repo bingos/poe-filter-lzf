@@ -1,6 +1,9 @@
 POE::Filter::LZF
 ================
 
+1.70	Mon Jun  1 13:44:55 BST 2009
+	- Makefile.PL meta updates
+
 1.68	Sat Jun 28 09:07:41 BST 2008
 	- Added LICENSE information.
 
