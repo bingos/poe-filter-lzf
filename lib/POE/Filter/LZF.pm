@@ -1,13 +1,12 @@
 package POE::Filter::LZF;
 
+#ABSTRACT: A POE filter wrapped around Compress::LZF
+
 use strict;
 use warnings;
 use Carp;
 use Compress::LZF qw(compress decompress);
-use vars qw($VERSION);
 use base qw(POE::Filter);
-
-$VERSION = '1.70';
 
 sub new {
   my $type = shift;
@@ -25,7 +24,7 @@ sub get {
   foreach my $raw_line (@$raw_lines) {
 	if ( my $line = decompress( $raw_line ) ) {
 		push @$events, $line;
-	} 
+	}
 	else {
 		warn "Couldn\'t decompress input\n";
 	}
@@ -45,7 +44,7 @@ sub get_one {
   if ( my $raw_line = shift ( @{ $self->{BUFFER} } ) ) {
 	if ( my $line = decompress( $raw_line ) ) {
 		push @$events, $line;
-	} 
+	}
 	else {
 		warn "Couldn\'t decompress input\n";
 	}
@@ -60,7 +59,7 @@ sub put {
   foreach my $event (@$events) {
 	if ( my $line = compress( $event ) ) {
 		push @$raw_lines, $line;
-	} 
+	}
 	else {
 		warn "Couldn\'t compress output\n";
 	}
@@ -76,13 +75,9 @@ sub clone {
   return bless $nself, ref $self;
 }
 
-1;
+qq[Compress Distress];
 
-__END__
-
-=head1 NAME
-
-POE::Filter::LZF - A POE filter wrapped around Compress::LZF
+=pod
 
 =head1 SYNOPSIS
 
@@ -110,7 +105,7 @@ suitable for use with L<POE::Filter::Stackable>.
 
 =item C<new>
 
-Creates a new POE::Filter::LZF object. 
+Creates a new POE::Filter::LZF object.
 
 =back
 
@@ -135,16 +130,6 @@ Takes an arrayref containing lines of uncompressed output, returns an arrayref o
 Makes a copy of the filter, and clears the copy's buffer.
 
 =back
-
-=head1 AUTHOR
-
-Chris C<BinGOs> Williams <chris@bingosnet.co.uk>
-
-=head1 LICENSE
-
-Copyright E<copy> Chris Williams
-
-This module may be used, modified, and distributed under the same terms as Perl itself. Please see the license that came with your Perl distribution for details.
 
 =head1 SEE ALSO
 
